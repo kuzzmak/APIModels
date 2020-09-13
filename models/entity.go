@@ -11,7 +11,5 @@ type Entity struct {
 	ReleaseDate string  `json:"releaseDate"`
 	Rating      float32 `json:"rating"`
 	Type        string  `json:"type"`
-	mux         sync.Mutex
+	Mux         sync.Mutex
 }
-
-
