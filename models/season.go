@@ -69,10 +69,13 @@ func (s *Season) GetEpisodes(wg *sync.WaitGroup, errChn chan<- error) {
 	for i := 0; i < len(titles); i++ {
 		e := &Episode{
 			Id:          ids[i],
-			SeasonId:    s.Id,
+			SeriesId:    s.SeriesId,
+			Season:      s.Id,
 			Name:        titles[i],
 			Rating:      0,
 			Description: descriptions[i],
+			PosterId:    "",
+			PosterLink:  "",
 		}
 
 		eps = append(eps, e)
