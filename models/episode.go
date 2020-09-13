@@ -2,8 +2,11 @@ package models
 
 type Episode struct {
 	Id          string  `json:"id"`
-	SeasonId    string  `json:"seasonId"`
+	SeriesId    string  `json:"seriesId"`
+	Season      string  `json:"season"`
 	Name        string  `json:"name"`
 	Rating      float32 `json:"rating"`
 	Description string  `json:"description"`
+	PosterId    string  `json:"posterId"`
+	PosterLink  string  `json:"posterLink"`
 }
