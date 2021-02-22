@@ -1,16 +1,18 @@
 package models
 
 import (
-	"github.com/gocolly/colly"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/gocolly/colly"
 )
 
+// Season represents one season in a series.
 type Season struct {
-	Id       string     `json:"id"`
-	SeriesId string     `json:"seriesId"`
-	Episodes []*Episode `json:"episodes"`
+	ID       string     `json:"ID"`
+	SeriesID string     `json:"SeriesID"`
+	Episodes []*Episode `json:"Episodes"`
 }
 
 // GetEpisodes fetches all episodes for one season of the series
@@ -57,7 +59,7 @@ func (s *Season) GetEpisodes(wg *sync.WaitGroup, errChn chan<- error) {
 		descriptions = append(descriptions, strings.TrimSpace(e.Text)) // episode description
 	})
 
-	err = c.Visit("https://www.imdb.com/title/" + s.SeriesId + "/episodes?season=" + s.Id)
+	err = c.Visit("https://www.imdb.com/title/" + s.SeriesID + "/episodes?season=" + s.ID)
 	if err != nil {
 		return
 	}
@@ -68,13 +70,13 @@ func (s *Season) GetEpisodes(wg *sync.WaitGroup, errChn chan<- error) {
 
 	for i := 0; i < len(titles); i++ {
 		e := &Episode{
-			Id:          ids[i],
-			SeriesId:    s.SeriesId,
-			Season:      s.Id,
+			ID:          ids[i],
+			SeriesID:    s.SeriesID,
+			Season:      s.ID,
 			Name:        titles[i],
 			Rating:      0,
 			Description: descriptions[i],
-			PosterId:    "",
+			PosterID:    "",
 			PosterLink:  "",
 		}
 
