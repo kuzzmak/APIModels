@@ -1,4 +1,4 @@
-module APIModels
+module github.com/kuzzmak/APIModels
 
 go 1.16
 
